@@ -1,94 +1,135 @@
-#include <QCoreApplication>
 #include <iostream>
 #include <iomanip>
-#include <ctime>
-#include <sys/time.h>
-#include <QtCore/QCoreApplication>
 #include <QElapsedTimer>
 
 
 using namespace std;
 
+/**
+ * @brief quickSort
+ * @param array
+ * @param firstElementNumder
+ * @param lastElementNumder
+ */
+void quickSort(int *array, int firstElementNumder, int lastElementNumder) {
+    int mid, count;
+    int f = firstElementNumder, l = lastElementNumder;
+    mid = array[(f + l) / 2];
+    do {
+        while (array[f] < mid) f++;
+        while (array[l] > mid) l--;
+        if (f <= l) {
+            count = array[f];
+            array[f] = array[l];
+            array[l] = count;
+            f++;
+            l--;
+        }
+    } while (f < l);
+    if (firstElementNumder < l) quickSort(array, firstElementNumder, l);
+    if (f < lastElementNumder) quickSort(array, f, lastElementNumder);
+}
 
-void insertionSort(int* array,int elementsCount){
-    for(int i=1;i<elementsCount;i++){
-        for(int numberElement=i; numberElement>0 && array[numberElement-1]>array[numberElement];numberElement--){
-            int tmp=array[numberElement-1];
-            array[numberElement-1] = array[numberElement-1] + array[numberElement];
-            array[numberElement] = array[numberElement-1] - array[numberElement];
-            array[numberElement-1] = array[numberElement-1] -array[numberElement];
+/**
+ * @brief insertionSort
+ * @param array
+ * @param elementsCount
+ */
+void insertionSort(int *array, int elementsCount) {
+    for (int firstElementNumder = 1; firstElementNumder < elementsCount; firstElementNumder++) {
+        for (int numberElement = firstElementNumder; numberElement > 0
+                                                     &&
+                                                     array[numberElement - 1] > array[numberElement]; numberElement--) {
+            array[numberElement - 1] = array[numberElement - 1] + array[numberElement];
+            array[numberElement] = array[numberElement - 1] - array[numberElement];
+            array[numberElement - 1] = array[numberElement - 1] - array[numberElement];
         }
     }
 }
 
-void bubbleSort(int* array, int elementsCount)
-{
- bool exit = false;
- while (!exit)
- {
-  exit = true;
-  for (int numberElement = 0; numberElement < (elementsCount - 1); numberElement++)
-    if (array[numberElement] > array[numberElement + 1])
-    {
-        array[numberElement+1] = array[numberElement+1] + array[numberElement];
-        array[numberElement] = array[numberElement+1] - array[numberElement];
-        array[numberElement+1] = array[numberElement+1] - array[numberElement];
-        exit = false;
+/**
+ * @brief bubbleSort
+ * @param array
+ * @param elementsCount
+ */
+void bubbleSort(int *array, int elementsCount) {
+    bool sorted = false;
+    while (!sorted) {
+        sorted = true;
+        for (int numberElement = 0; numberElement < (elementsCount - 1); numberElement++)
+            if (array[numberElement] > array[numberElement + 1]) {
+                array[numberElement + 1] = array[numberElement + 1] + array[numberElement];
+                array[numberElement] = array[numberElement + 1] - array[numberElement];
+                array[numberElement + 1] = array[numberElement + 1] - array[numberElement];
+                sorted = false;
+            }
     }
- }
 }
 
-void fillArray(int* array, int elementsCount){
-    for (int numberElement = 0; numberElement < elementsCount; numberElement++)
-    {
+/**
+ * @brief fillArray
+ * @param array
+ * @param elementsCount
+ */
+void fillArray(int *array, int elementsCount) {
+    for (int numberElement = 0; numberElement < elementsCount; numberElement++) {
         array[numberElement] = rand() % 65535;
     }
 }
 
-void print(int* array, int elementsCount){
-    for (int numberElement = 0; numberElement < elementsCount; numberElement++)
-    {
+/**
+ * @brief print
+ * @param array
+ * @param elementsCount
+ */
+void print(int *array, int elementsCount) {
+    for (int numberElement = 0; numberElement < elementsCount; numberElement++) {
         cout << setw(2) << array[numberElement] << "  ";
+    }
+    cout << endl;
+}
+
+/**
+ * @brief arrayDuplicator void
+ * @param arrayIn array
+ * @param arrayOut array
+ * @param elementsCount int
+ */
+void arrayDuplicator(int arrayIn[], int arrayOut[], int elementsCount) {
+    for (int numberElement = 0; numberElement < elementsCount; numberElement++) {
+        arrayOut[numberElement] = arrayIn[numberElement];
     }
 }
 
-int main()
-{
+
+int main() {
     srand(time(NULL));
-    cout << "Enter arrayay elements count: ";
+
     int elementsCount;
+    cout << "Enter array elements count: ";
     cin >> elementsCount;
 
-
-    int *randomarrayay = new int [elementsCount];
-    int *bubbleSortarrayay = new int [elementsCount];
-    int *insertionSortarrayay = new int [elementsCount];
-    fillArray(randomarrayay,elementsCount);
-    cout << "\n\n";
-
-
-    fillArray(bubbleSortarrayay,elementsCount);
-    fillArray(insertionSortarrayay,elementsCount);
     QElapsedTimer timer;
+
+    int *array = new int[elementsCount];
+    int *arrayTemp = new int[elementsCount];
+    fillArray(array, elementsCount);
+
+    arrayDuplicator(array, arrayTemp, elementsCount);
     timer.start();
-    cout << "Start: " << timer.elapsed() << " milliseconds"<< "\n\n";
-    bubbleSort(bubbleSortarrayay, elementsCount);
+    quickSort(arrayTemp, 0, elementsCount - 1);
+    cout << "quickSort: " << timer.elapsed() << " milliseconds" << "\n\n";
 
-    cout << "bubbleSort: " << timer.elapsed() << " milliseconds"<< "\n\n";
+    arrayDuplicator(array, arrayTemp, elementsCount);
     timer.restart();
-    insertionSort(insertionSortarrayay, elementsCount);
+    insertionSort(arrayTemp, elementsCount);
+    cout << "insertionSort: " << timer.elapsed() << " milliseconds" << "\n\n";
 
-    cout << "insertionSort: " << timer.elapsed() << " milliseconds"<< "\n\n";
-
-
-    for (int numberElement = 0; numberElement < elementsCount; numberElement++)
-    {
-
-    }
-    cout << "\n";
+    arrayDuplicator(array, arrayTemp, elementsCount);
+    timer.restart();
+    bubbleSort(arrayTemp, elementsCount);
+    cout << "bubbleSort: " << timer.elapsed() << " milliseconds" << "\n\n";
 
     system("pause");
     return 0;
 }
-
-

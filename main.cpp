@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <QElapsedTimer>
-
+#include <time.h>
 
 using namespace std;
 
@@ -103,32 +102,43 @@ void arrayDuplicator(int arrayIn[], int arrayOut[], int elementsCount) {
 
 
 int main() {
-    srand(time(NULL));
-
     int elementsCount;
     cout << "Enter array elements count: ";
     cin >> elementsCount;
 
-    QElapsedTimer timer;
+    srand(time(NULL));
+    clock_t timerClock = 0;
+    double sortTime[3];
+
 
     int *array = new int[elementsCount];
     int *arrayTemp = new int[elementsCount];
     fillArray(array, elementsCount);
 
     arrayDuplicator(array, arrayTemp, elementsCount);
-    timer.start();
+
+    timerClock = clock();
     quickSort(arrayTemp, 0, elementsCount - 1);
-    cout << "quickSort: " << timer.elapsed() << " milliseconds" << "\n\n";
+    timerClock = clock() - timerClock;
+    sortTime[0] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
+    cout << "Clock quickSort: " << sortTime[0] << " milliseconds" << "\n\n";
 
     arrayDuplicator(array, arrayTemp, elementsCount);
-    timer.restart();
+
+    timerClock = clock();
     insertionSort(arrayTemp, elementsCount);
-    cout << "insertionSort: " << timer.elapsed() << " milliseconds" << "\n\n";
+    timerClock = clock() - timerClock;
+    sortTime[1] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
+    cout << "Clock insertionSort: " << sortTime[1] << " milliseconds" << "\n\n";
+
 
     arrayDuplicator(array, arrayTemp, elementsCount);
-    timer.restart();
+
+    timerClock = clock();
     bubbleSort(arrayTemp, elementsCount);
-    cout << "bubbleSort: " << timer.elapsed() << " milliseconds" << "\n\n";
+    timerClock = clock() - timerClock;
+    sortTime[2] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
+    cout << "Clock bubbleSort: " << sortTime[2] << " milliseconds" << "\n\n";
 
     system("pause");
     return 0;

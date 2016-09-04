@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <time.h>
+#include <fstream>
+#include <cstring>
 
 using namespace std;
 
@@ -100,6 +102,25 @@ void arrayDuplicator(int arrayIn[], int arrayOut[], int elementsCount) {
     }
 }
 
+void write(int *array, int elementsCount, char *fileName) {
+    ofstream fileStream;
+
+    char fileTimePrefix[256];
+    time_t seconds = time(NULL);
+    tm *timeinfo = localtime(&seconds);
+    strftime(fileTimePrefix, 128, "%d%m%Y_%I%M%S-", timeinfo);
+
+    strcat(fileTimePrefix,fileName);
+    strcat(fileTimePrefix,".csv");
+
+    cout<<fileTimePrefix<<endl;
+    fileStream.open(fileTimePrefix, ios_base::out | ios_base::trunc);
+    for (int i = 0; i < elementsCount; i++) {
+        fileStream << array[i] << ';' << endl;
+    }
+    fileStream.close();
+}
+
 
 int main() {
     int elementsCount;
@@ -109,17 +130,17 @@ int main() {
     srand(time(NULL));
     clock_t timerClock = 0;
     double sortTime[3];
-
-
     int *array = new int[elementsCount];
     int *arrayTemp = new int[elementsCount];
     fillArray(array, elementsCount);
 
+    write(array, elementsCount, "array");
     arrayDuplicator(array, arrayTemp, elementsCount);
 
     timerClock = clock();
-    quickSort(arrayTemp, 0, elementsCount - 1);
+    quickSort(arrayTemp, 0, elementsCount - 1);   
     timerClock = clock() - timerClock;
+    write(arrayTemp, elementsCount, "quickSort");
     sortTime[0] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
     cout << "Clock quickSort: " << sortTime[0] << " milliseconds" << "\n\n";
 
@@ -128,6 +149,7 @@ int main() {
     timerClock = clock();
     insertionSort(arrayTemp, elementsCount);
     timerClock = clock() - timerClock;
+    write(arrayTemp, elementsCount, "insertionSort");
     sortTime[1] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
     cout << "Clock insertionSort: " << sortTime[1] << " milliseconds" << "\n\n";
 
@@ -137,6 +159,7 @@ int main() {
     timerClock = clock();
     bubbleSort(arrayTemp, elementsCount);
     timerClock = clock() - timerClock;
+    write(arrayTemp, elementsCount, "bubbleSort");
     sortTime[2] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
     cout << "Clock bubbleSort: " << sortTime[2] << " milliseconds" << "\n\n";
 

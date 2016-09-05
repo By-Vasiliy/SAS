@@ -12,16 +12,16 @@
  * @param lastElementNumder
  */
 void quickSort(int *array, int firstElementNumder, int lastElementNumder) {
-    int mid, count;
+    int averageElementNumber, temp;
     int f = firstElementNumder, l = lastElementNumder;
-    mid = array[(f + l) / 2];
+    averageElementNumber = array[(f + l) / 2];
     do {
-        while (array[f] < mid) f++;
-        while (array[l] > mid) l--;
+        while (array[f] < averageElementNumber) f++;
+        while (array[l] > averageElementNumber) l--;
         if (f <= l) {
-            count = array[f];
+            temp = array[f];
             array[f] = array[l];
-            array[l] = count;
+            array[l] = temp;
             f++;
             l--;
         }

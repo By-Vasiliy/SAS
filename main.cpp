@@ -3,6 +3,7 @@
 #include <time.h>
 #include <fstream>
 #include <cstring>
+#include <QElapsedTimer>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ int main() {
     cout << "Enter array elements count: ";
     cin >> elementsCount;
 
+    QElapsedTimer timer;
     srand(time(NULL));
     clock_t timerClock = 0;
     double sortTime[3];
@@ -34,30 +36,35 @@ int main() {
     arrayDuplicator(array, arrayTemp, elementsCount);
 
     timerClock = clock();
+    timer.start();
     quickSort(arrayTemp, 0, elementsCount - 1);
     timerClock = clock() - timerClock;
     write(arrayTemp, elementsCount, "quickSort");
     sortTime[0] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
-    cout << "Clock quickSort: " << sortTime[0] << " milliseconds" << "\n\n";
+    cout << "Clock quickSort: " << sortTime[0] << " milliseconds" << "\n";
+    cout << "QElapsedTimer quickSort: " << timer.elapsed() << " milliseconds" << "\n\n";
 
     arrayDuplicator(array, arrayTemp, elementsCount);
 
+    timer.restart();
     timerClock = clock();
     insertionSort(arrayTemp, elementsCount);
     timerClock = clock() - timerClock;
     write(arrayTemp, elementsCount, "insertionSort");
     sortTime[1] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
-    cout << "Clock insertionSort: " << sortTime[1] << " milliseconds" << "\n\n";
-
+    cout << "Clock insertionSort: " << sortTime[1] << " milliseconds" << "\n";
+    cout << "QElapsedTimer quickSort: " << timer.elapsed() << " milliseconds" << "\n\n";
 
     arrayDuplicator(array, arrayTemp, elementsCount);
 
+    timer.restart();
     timerClock = clock();
     bubbleSort(arrayTemp, elementsCount);
     timerClock = clock() - timerClock;
     write(arrayTemp, elementsCount, "bubbleSort");
     sortTime[2] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
-    cout << "Clock bubbleSort: " << sortTime[2] << " milliseconds" << "\n\n";
+    cout << "Clock bubbleSort: " << sortTime[2] << " milliseconds" << "\n";
+    cout << "QElapsedTimer quickSort: " << timer.elapsed() << " milliseconds" << "\n\n";
 
     system("pause");
     return 0;
@@ -97,8 +104,7 @@ void quickSort(int *array, int firstElementNumder, int lastElementNumder) {
 void insertionSort(int *array, int elementsCount) {
     for (int firstElementNumder = 1; firstElementNumder < elementsCount; firstElementNumder++) {
         for (int numberElement = firstElementNumder; numberElement > 0
-                                                     &&
-                                                     array[numberElement - 1] > array[numberElement]; numberElement--) {
+            && array[numberElement - 1] > array[numberElement]; numberElement--) {
             array[numberElement - 1] = array[numberElement - 1] + array[numberElement];
             array[numberElement] = array[numberElement - 1] - array[numberElement];
             array[numberElement - 1] = array[numberElement - 1] - array[numberElement];

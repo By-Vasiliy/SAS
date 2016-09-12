@@ -3,18 +3,18 @@
 
 
 # C++ Быстрая сортировка рекурсией (QSort)
-***void quickSort(int *array, int firstElementNumder, int lastElementNumder);***
+***void quickSort(int *array, int firstElementNumber, int lastElementNumber);***
 ```
 /**
  * @brief quickSort
  * @param array
- * @param firstElementNumder
- * @param lastElementNumder
+ * @param firstElementNumber
+ * @param lastElementNumber
  */
-void quickSort(int *array, int firstElementNumder, int lastElementNumder) {
+void quickSort(int *array, int firstElementNumber, int lastElementNumber) {
     int averageElementNumber, temp;
-    int f = firstElementNumder, l = lastElementNumder;
-    averageElementNumber = array[(f + l) / 2];
+    int f = firstElementNumber, l = lastElementNumber;
+    averageElementNumber = array[f + (l - f) / 2];
     do {
         while (array[f] < averageElementNumber) f++;
         while (array[l] > averageElementNumber) l--;
@@ -26,8 +26,8 @@ void quickSort(int *array, int firstElementNumder, int lastElementNumder) {
             l--;
         }
     } while (f < l);
-    if (firstElementNumder < l) quickSort(array, firstElementNumder, l);
-    if (f < lastElementNumder) quickSort(array, f, lastElementNumder);
+    if (firstElementNumber < l) quickSort(array, firstElementNumber, l);
+    if (f < lastElementNumber) quickSort(array, f, lastElementNumber);
 }
 ```
 
@@ -40,12 +40,14 @@ void quickSort(int *array, int firstElementNumder, int lastElementNumder) {
  * @param elementsCount
  */
 void insertionSort(int *array, int elementsCount) {
-    for (int firstElementNumder = 1; firstElementNumder < elementsCount; firstElementNumder++) {
-        for (int numberElement = firstElementNumder; numberElement > 0
-            && array[numberElement - 1] > array[numberElement]; numberElement--) {
-            array[numberElement - 1] = array[numberElement - 1] + array[numberElement];
-            array[numberElement] = array[numberElement - 1] - array[numberElement];
-            array[numberElement - 1] = array[numberElement - 1] - array[numberElement];
+    int temp;
+    for (int firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
+        for (int elementNumber = firstElementNumber; elementNumber > 0
+                                                     &&
+                                                     array[elementNumber - 1] > array[elementNumber]; elementNumber--) {
+            temp = array[elementNumber - 1];
+            array[elementNumber - 1] = array[elementNumber];
+            array[elementNumber] = temp;
         }
     }
 }
@@ -61,13 +63,14 @@ void insertionSort(int *array, int elementsCount) {
  */
 void bubbleSort(int *array, int elementsCount) {
     bool sorted = false;
+    int temp;
     while (!sorted) {
         sorted = true;
-        for (int numberElement = 0; numberElement < (elementsCount - 1); numberElement++)
-            if (array[numberElement] > array[numberElement + 1]) {
-                array[numberElement + 1] = array[numberElement + 1] + array[numberElement];
-                array[numberElement] = array[numberElement + 1] - array[numberElement];
-                array[numberElement + 1] = array[numberElement + 1] - array[numberElement];
+        for (int elementNumber = 0; elementNumber < (elementsCount - 1); elementNumber++)
+            if (array[elementNumber] > array[elementNumber + 1]) {
+                temp = array[elementNumber + 1];
+                array[elementNumber + 1] = array[elementNumber];
+                array[elementNumber] = temp;
                 sorted = false;
             }
     }

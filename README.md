@@ -42,9 +42,9 @@ void quickSort(int *array, int firstElementNumber, int lastElementNumber) {
 void insertionSort(int *array, int elementsCount) {
     int temp;
     for (int firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
-        for (int elementNumber = firstElementNumber; elementNumber > 0
-                                                     &&
-                                                     array[elementNumber - 1] > array[elementNumber]; elementNumber--) {
+        for (int elementNumber = firstElementNumber;
+             elementNumber > 0 && array[elementNumber - 1] > array[elementNumber];
+             elementNumber--) {
             temp = array[elementNumber - 1];
             array[elementNumber - 1] = array[elementNumber];
             array[elementNumber] = temp;

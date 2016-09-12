@@ -13,21 +13,21 @@
  */
 void quickSort(int *array, int firstElementNumber, int lastElementNumber) {
     int averageElementNumber, temp;
-    int f = firstElementNumber, l = lastElementNumber;
-    averageElementNumber = array[f + (l - f) / 2];
+    int leftElementNumber = firstElementNumber, rightElementNumber = lastElementNumber;
+    averageElementNumber = array[leftElementNumber + (rightElementNumber - leftElementNumber) / 2];
     do {
-        while (array[f] < averageElementNumber) f++;
-        while (array[l] > averageElementNumber) l--;
-        if (f <= l) {
-            temp = array[f];
-            array[f] = array[l];
-            array[l] = temp;
-            f++;
-            l--;
+        while (array[leftElementNumber] < averageElementNumber) leftElementNumber++;
+        while (array[rightElementNumber] > averageElementNumber) rightElementNumber--;
+        if (leftElementNumber <= rightElementNumber) {
+            temp = array[leftElementNumber];
+            array[leftElementNumber] = array[rightElementNumber];
+            array[rightElementNumber] = temp;
+            leftElementNumber++;
+            rightElementNumber--;
         }
-    } while (f < l);
-    if (firstElementNumber < l) quickSort(array, firstElementNumber, l);
-    if (f < lastElementNumber) quickSort(array, f, lastElementNumber);
+    } while (leftElementNumber < rightElementNumber);
+    if (firstElementNumber < rightElementNumber) quickSort(array, firstElementNumber, rightElementNumber);
+    if (leftElementNumber < lastElementNumber) quickSort(array, leftElementNumber, lastElementNumber);
 }
 ```
 

@@ -13,7 +13,8 @@ using namespace std;
  */
 void quickSort(int *array, int firstElementNumber, int lastElementNumber);
 
-void insertionSort(int *array, int elementsCount);
+template<typename insertionSortType, typename insertionSortCounterType>
+void insertionSort(insertionSortType *array, insertionSortCounterType elementsCount);
 
 template<typename bubbleSortType, typename bubbleSortCounterType>
 void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount);
@@ -105,7 +106,8 @@ void quickSort(int *array, int firstElementNumber, int lastElementNumber) {
  * @param array
  * @param elementsCount
  */
-void insertionSort(int *array, int elementsCount) {
+template<typename insertionSortType, typename insertionSortCounterType>
+void insertionSort(insertionSortType *array, insertionSortCounterType elementsCount) {
     int temp;
     for (int firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
         for (int elementNumber = firstElementNumber;

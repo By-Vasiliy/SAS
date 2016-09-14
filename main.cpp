@@ -23,7 +23,8 @@ void fillArray(fillArrayType *array, fillArrayCounterType elementsCount);
 
 void print(int *array, int elementsCount);
 
-void arrayDuplicator(int arrayIn[], int arrayOut[], int elementsCount);
+template<typename arrayDuplicatorType,typename arrayDuplicatorCounterType>
+void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[], arrayDuplicatorCounterType elementsCount);
 
 void write(int *array, int elementsCount, char *fileName);
 
@@ -37,11 +38,8 @@ int main() {
     clock_t timerClock = clock();
     double sortTime[3];
     int *array = new int[elementsCount];
-    double *arrayd= new double[elementsCount];
     int *arrayTemp = new int[elementsCount];
     fillArray(array, elementsCount);
-    fillArray(arrayd, elementsCount);
-    bubbleSort(arrayd,elementsCount);
 
     write(array, elementsCount, "array");
     arrayDuplicator(array, arrayTemp, elementsCount);
@@ -164,13 +162,15 @@ void print(int *array, int elementsCount) {
     cout << endl;
 }
 
+
 /**
- * @brief arrayDuplicator void
- * @param arrayIn array
- * @param arrayOut array
- * @param elementsCount int
+ * @brief arrayDuplicator
+ * @param arrayIn
+ * @param arrayOut
+ * @param elementsCount
  */
-void arrayDuplicator(int arrayIn[], int arrayOut[], int elementsCount) {
+template<typename arrayDuplicatorType,typename arrayDuplicatorCounterType>
+void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[], arrayDuplicatorCounterType elementsCount) {
     for (int elementNumber = 0; elementNumber < elementsCount; elementNumber++) {
         arrayOut[elementNumber] = arrayIn[elementNumber];
     }

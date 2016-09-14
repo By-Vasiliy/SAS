@@ -11,7 +11,8 @@ using namespace std;
 /**
  * Functions initialization
  */
-void quickSort(int *array, int firstElementNumber, int lastElementNumber);
+template<typename quickSortType, typename quickSortNumberType>
+void quickSort(int *array, quickSortType firstElementNumber, quickSortNumberType lastElementNumber);
 
 template<typename insertionSortType, typename insertionSortCounterType>
 void insertionSort(insertionSortType *array, insertionSortCounterType elementsCount);
@@ -82,7 +83,8 @@ int main() {
  * @param firstElementNumber
  * @param lastElementNumber
  */
-void quickSort(int *array, int firstElementNumber, int lastElementNumber) {
+template<typename quickSortType, typename quickSortNumberType>
+void quickSort(int *array, quickSortType firstElementNumber, quickSortNumberType lastElementNumber) {
     int averageElementNumber, temp;
     int leftElementNumber = firstElementNumber, rightElementNumber = lastElementNumber;
     averageElementNumber = array[leftElementNumber + (rightElementNumber - leftElementNumber) / 2];

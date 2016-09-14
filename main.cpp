@@ -3,6 +3,8 @@
 #include <time.h>
 #include <fstream>
 #include <cstring>
+#include <cstdlib>
+
 
 using namespace std;
 
@@ -13,9 +15,11 @@ void quickSort(int *array, int firstElementNumber, int lastElementNumber);
 
 void insertionSort(int *array, int elementsCount);
 
-void bubbleSort(int *array, int elementsCount);
+template<typename bubbleSortType,typename bubbleSortCounterType>
+void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount);
 
-void fillArray(int *array, int elementsCount);
+template<typename fillArrayType,typename fillArrayCounterType>
+void fillArray(fillArrayType *array, fillArrayCounterType elementsCount);
 
 void print(int *array, int elementsCount);
 
@@ -30,11 +34,14 @@ int main() {
     cin >> elementsCount;
 
     srand(time(NULL));
-    clock_t timerClock = 0;
+    clock_t timerClock = clock();
     double sortTime[3];
     int *array = new int[elementsCount];
+    double *arrayd= new double[elementsCount];
     int *arrayTemp = new int[elementsCount];
     fillArray(array, elementsCount);
+    fillArray(arrayd, elementsCount);
+    bubbleSort(arrayd,elementsCount);
 
     write(array, elementsCount, "array");
     arrayDuplicator(array, arrayTemp, elementsCount);
@@ -117,7 +124,8 @@ void insertionSort(int *array, int elementsCount) {
  * @param array
  * @param elementsCount
  */
-void bubbleSort(int *array, int elementsCount) {
+template<typename bubbleSortType,typename bubbleSortCounterType>
+void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount) {
     bool sorted = false;
     int temp;
     while (!sorted) {
@@ -137,7 +145,8 @@ void bubbleSort(int *array, int elementsCount) {
  * @param array
  * @param elementsCount
  */
-void fillArray(int *array, int elementsCount) {
+template<typename fillArrayType,typename fillArrayCounterType>
+void fillArray(fillArrayType *array, fillArrayCounterType elementsCount) {
     for (int elementNumber = 0; elementNumber < elementsCount; elementNumber++) {
         array[elementNumber] = rand() % 65535;
     }
@@ -184,10 +193,16 @@ void write(int *array, int elementsCount, char *fileName) {
     strcat(fileTimePrefix, fileName);
     strcat(fileTimePrefix, ".csv");
 
-    //cout<<fileTimePrefix<<endl;
     fileStream.open(fileTimePrefix, ios_base::out | ios_base::trunc);
     for (int i = 0; i < elementsCount; i++) {
         fileStream << array[i] << ';' << endl;
     }
     fileStream.close();
+}
+
+void show(int *array, int elementsCount) {
+    for (int i = 0; i < elementsCount; i++) {
+        std::cout << array[i] << ';';
+    }
+    std::cout << endl;
 }

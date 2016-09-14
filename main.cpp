@@ -15,16 +15,17 @@ void quickSort(int *array, int firstElementNumber, int lastElementNumber);
 
 void insertionSort(int *array, int elementsCount);
 
-template<typename bubbleSortType,typename bubbleSortCounterType>
+template<typename bubbleSortType, typename bubbleSortCounterType>
 void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount);
 
-template<typename fillArrayType,typename fillArrayCounterType>
+template<typename fillArrayType, typename fillArrayCounterType>
 void fillArray(fillArrayType *array, fillArrayCounterType elementsCount);
 
 void print(int *array, int elementsCount);
 
-template<typename arrayDuplicatorType,typename arrayDuplicatorCounterType>
-void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[], arrayDuplicatorCounterType elementsCount);
+template<typename arrayDuplicatorType, typename arrayDuplicatorCounterType>
+void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[],
+                     arrayDuplicatorCounterType elementsCount);
 
 void write(int *array, int elementsCount, char *fileName);
 
@@ -122,7 +123,7 @@ void insertionSort(int *array, int elementsCount) {
  * @param array
  * @param elementsCount
  */
-template<typename bubbleSortType,typename bubbleSortCounterType>
+template<typename bubbleSortType, typename bubbleSortCounterType>
 void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount) {
     bool sorted = false;
     int temp;
@@ -143,7 +144,7 @@ void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount) {
  * @param array
  * @param elementsCount
  */
-template<typename fillArrayType,typename fillArrayCounterType>
+template<typename fillArrayType, typename fillArrayCounterType>
 void fillArray(fillArrayType *array, fillArrayCounterType elementsCount) {
     for (int elementNumber = 0; elementNumber < elementsCount; elementNumber++) {
         array[elementNumber] = rand() % 65535;
@@ -169,8 +170,9 @@ void print(int *array, int elementsCount) {
  * @param arrayOut
  * @param elementsCount
  */
-template<typename arrayDuplicatorType,typename arrayDuplicatorCounterType>
-void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[], arrayDuplicatorCounterType elementsCount) {
+template<typename arrayDuplicatorType, typename arrayDuplicatorCounterType>
+void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[],
+                     arrayDuplicatorCounterType elementsCount) {
     for (int elementNumber = 0; elementNumber < elementsCount; elementNumber++) {
         arrayOut[elementNumber] = arrayIn[elementNumber];
     }

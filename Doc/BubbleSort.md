@@ -14,10 +14,10 @@
 template<typename bubbleSortType, typename bubbleSortCounterType>
 void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount) {
     bool sorted = false;
-    int temp;
+    bubbleSortType temp;
     while (!sorted) {
         sorted = true;
-        for (int elementNumber = 0; elementNumber < (elementsCount - 1); elementNumber++)
+        for (bubbleSortCounterType elementNumber = 0; elementNumber < (elementsCount - 1); elementNumber++)
             if (array[elementNumber] > array[elementNumber + 1]) {
                 temp = array[elementNumber + 1];
                 array[elementNumber + 1] = array[elementNumber];

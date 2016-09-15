@@ -12,9 +12,9 @@
 ~~~
 template<typename insertionSortType, typename insertionSortCounterType>
 void insertionSort(insertionSortType *array, insertionSortCounterType elementsCount) {
-    int temp;
-    for (int firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
-        for (int elementNumber = firstElementNumber;
+    insertionSortType temp;
+    for (insertionSortCounterType firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
+        for (insertionSortCounterType elementNumber = firstElementNumber;
              elementNumber > 0 && array[elementNumber - 1] > array[elementNumber];
              elementNumber--) {
             temp = array[elementNumber - 1];

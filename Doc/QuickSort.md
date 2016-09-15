@@ -25,8 +25,8 @@
 ~~~
 template<typename quickSortType, typename quickSortNumberType>
 void quickSort(int *array, quickSortType firstElementNumber, quickSortNumberType lastElementNumber) {
-    int averageElementNumber, temp;
-    int leftElementNumber = firstElementNumber, rightElementNumber = lastElementNumber;
+    quickSortType averageElementNumber, temp;
+    quickSortNumberType leftElementNumber = firstElementNumber, rightElementNumber = lastElementNumber;
     averageElementNumber = array[leftElementNumber + (rightElementNumber - leftElementNumber) / 2];
     do {
         while (array[leftElementNumber] < averageElementNumber) leftElementNumber++;

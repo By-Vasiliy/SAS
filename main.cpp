@@ -23,6 +23,7 @@ void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount);
 template<typename fillArrayType, typename fillArrayCounterType>
 void fillArray(fillArrayType *array, fillArrayCounterType elementsCount);
 
+
 void print(int *array, int elementsCount);
 
 template<typename arrayDuplicatorType, typename arrayDuplicatorCounterType>
@@ -31,9 +32,8 @@ void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut
 
 void write(int *array, int elementsCount, char *fileName);
 
-
 int main() {
-    int elementsCount;
+    unsigned long long elementsCount;
     cout << "Enter array elements count: ";
     cin >> elementsCount;
 
@@ -72,7 +72,7 @@ int main() {
     sortTime[2] = (((double) timerClock) / (double) CLOCKS_PER_SEC) * 1000;
     cout << "Clock bubbleSort: " << sortTime[2] << " milliseconds" << "\n";
 
-    system("pause");
+    //system("pause");
     return 0;
 }
 
@@ -85,8 +85,8 @@ int main() {
  */
 template<typename quickSortType, typename quickSortNumberType>
 void quickSort(int *array, quickSortType firstElementNumber, quickSortNumberType lastElementNumber) {
-    int averageElementNumber, temp;
-    int leftElementNumber = firstElementNumber, rightElementNumber = lastElementNumber;
+    quickSortType averageElementNumber, temp;
+    quickSortNumberType leftElementNumber = firstElementNumber, rightElementNumber = lastElementNumber;
     averageElementNumber = array[leftElementNumber + (rightElementNumber - leftElementNumber) / 2];
     do {
         while (array[leftElementNumber] < averageElementNumber) leftElementNumber++;
@@ -110,9 +110,9 @@ void quickSort(int *array, quickSortType firstElementNumber, quickSortNumberType
  */
 template<typename insertionSortType, typename insertionSortCounterType>
 void insertionSort(insertionSortType *array, insertionSortCounterType elementsCount) {
-    int temp;
-    for (int firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
-        for (int elementNumber = firstElementNumber;
+    insertionSortType temp;
+    for (insertionSortCounterType firstElementNumber = 1; firstElementNumber < elementsCount; firstElementNumber++) {
+        for (insertionSortCounterType elementNumber = firstElementNumber;
              elementNumber > 0 && array[elementNumber - 1] > array[elementNumber];
              elementNumber--) {
             temp = array[elementNumber - 1];
@@ -130,10 +130,10 @@ void insertionSort(insertionSortType *array, insertionSortCounterType elementsCo
 template<typename bubbleSortType, typename bubbleSortCounterType>
 void bubbleSort(bubbleSortType *array, bubbleSortCounterType elementsCount) {
     bool sorted = false;
-    int temp;
+    bubbleSortType temp;
     while (!sorted) {
         sorted = true;
-        for (int elementNumber = 0; elementNumber < (elementsCount - 1); elementNumber++)
+        for (bubbleSortCounterType elementNumber = 0; elementNumber < (elementsCount - 1); elementNumber++)
             if (array[elementNumber] > array[elementNumber + 1]) {
                 temp = array[elementNumber + 1];
                 array[elementNumber + 1] = array[elementNumber];
@@ -177,7 +177,7 @@ void print(int *array, int elementsCount) {
 template<typename arrayDuplicatorType, typename arrayDuplicatorCounterType>
 void arrayDuplicator(arrayDuplicatorType arrayIn[], arrayDuplicatorType arrayOut[],
                      arrayDuplicatorCounterType elementsCount) {
-    for (int elementNumber = 0; elementNumber < elementsCount; elementNumber++) {
+    for (arrayDuplicatorCounterType elementNumber = 0; elementNumber < elementsCount; elementNumber++) {
         arrayOut[elementNumber] = arrayIn[elementNumber];
     }
 }
@@ -204,11 +204,4 @@ void write(int *array, int elementsCount, char *fileName) {
         fileStream << array[i] << ';' << endl;
     }
     fileStream.close();
-}
-
-void show(int *array, int elementsCount) {
-    for (int i = 0; i < elementsCount; i++) {
-        std::cout << array[i] << ';';
-    }
-    std::cout << endl;
 }

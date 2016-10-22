@@ -1,0 +1,8 @@
+# Always only images
+*
+!*/
+!.gitignore
+!*.png
+!*.jpg
+!*.gif
+!*.jpeg

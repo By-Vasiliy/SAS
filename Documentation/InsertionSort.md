@@ -6,7 +6,7 @@
 В начальный момент отсортированная последовательность пуста. На каждом шаге алгоритма выбирается один из элементов входных данных и помещается на нужную позицию в уже отсортированной последовательности до тех пор, пока набор входных данных не будет исчерпан. В любой момент времени в отсортированной последовательности элементы удовлетворяют требованиям к выходным данным алгоритма.
 Данный алгоритм можно ускорить при помощи использования бинарного поиска для нахождения места текущему элементу в отсортированной части. Проблема с долгим сдвигом массива вправо решается 
 
-[![Сортировка вставками алгоритм GIF](https://cdn.rawgit.com/By-Vasiliy/SAS/4a7ae8558ab772f67ac631131bb5a78599662f73/Documentation/images/Insertion-sort-example-300px.gif)](https://github.com/By-Vasiliy/SAS/blob/develop/Documentation/InsertionSort.md#Алгоритм)
+[![Сортировка вставками алгоритм GIF](https://cdn.rawgit.com/vasilyukvasiliy/Sorting-Algorithms-Speed/4a7ae8558ab772f67ac631131bb5a78599662f73/Documentation/images/Insertion-sort-example-300px.gif)](https://github.com/vasilyukvasiliy/Sorting-Algorithms-Speed/blob/master/Documentation/InsertionSort.md#Алгоритм)
 
 # Сортировка вставками код C++
 ~~~

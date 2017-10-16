@@ -19,7 +19,7 @@
 
 Поскольку в каждой итерации (на каждом следующем уровне рекурсии) длина обрабатываемого отрезка массива уменьшается, по меньшей мере, на единицу, терминальная ветвь рекурсии будет достигнута обязательно, и обработка гарантированно завершится.
 
-[![Быстрая сортировка алгоритм GIF](https://cdn.rawgit.com/By-Vasiliy/SAS/4a7ae8558ab772f67ac631131bb5a78599662f73/Documentation/images/Sorting_quicksort_anim.gif)](https://github.com/By-Vasiliy/SAS/blob/develop/Documentation/QuickSort.md#Алгоритм)
+[![Быстрая сортировка алгоритм GIF](https://cdn.rawgit.com/vasilyukvasiliy/Sorting-Algorithms-Speed/4a7ae8558ab772f67ac631131bb5a78599662f73/Documentation/images/Sorting_quicksort_anim.gif)](https://github.com/vasilyukvasiliy/Sorting-Algorithms-Speed/blob/master/Documentation/QuickSort.md#Алгоритм)
 
 # Быстрая сортировка (QSort) код C++
 ~~~
